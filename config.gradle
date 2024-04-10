@@ -1,0 +1,17 @@
+// 依赖版本管理
+ext {
+  versions = ["lombokVersion": "1.18.12",
+              "hutoolVersion": "5.5.8",
+              "mysqlVersion" : "8.0.11",]
+
+  dependencies = ["lombok"                   : "org.projectlombok:lombok:${versions.lombokVersion}",
+                  "mybatis-plus-boot-starter": "com.baomidou:mybatis-plus-boot-starter:3.4.2",
+                  "druid-spring-boot-starter": "com.alibaba:druid-spring-boot-starter:1.1.17",
+
+                  "mysql"                    : "mysql:mysql-connector-java:${versions.mysqlVersion}",
+                  "hutool-all"               : "cn.hutool:hutool-all:${versions.hutoolVersion}",]
+}
+// 测试
+//task('B'){
+//  println "${versions.lombokVersion}"
+//}

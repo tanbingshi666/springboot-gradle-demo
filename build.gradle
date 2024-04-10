@@ -1,0 +1,57 @@
+plugins {
+  id 'java'
+  id 'org.springframework.boot' version '2.3.7.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+}
+
+apply from: "config.gradle"
+//获取 config.gradle 配置测试
+//task('A') {
+//  println "${versions.mysqlVersion}"
+//}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+// 所有模块/项目的通用配置
+allprojects {
+  // group + version 统一
+  group 'org.example'
+  version '1.0-SNAPSHOT'
+
+  // springboot 依赖管理器
+  apply plugin: 'org.springframework.boot'
+  apply plugin: 'io.spring.dependency-management'
+
+  //基本JDK配置
+  sourceCompatibility = JavaVersion.VERSION_1_8 // 1.8
+  targetCompatibility = JavaVersion.VERSION_1_8 // 1.8
+  compileJava.options.encoding "UTF-8"
+  compileTestJava.options.encoding "UTF-8"
+  javadoc.options.encoding "UTF-8"
+  tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+  }
+
+  repositories {
+    //maven仓库
+    mavenLocal()
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    mavenCentral()
+  }
+}
+
+// 子模块/项目的统一配置
+subprojects {
+  apply plugin: 'java'
+  // dependencyManagement版本统一管理，类似于父maven的dependencyManagement
+  dependencyManagement {
+    dependencies {
+      for (depJar in rootProject.ext.dependencies) {
+        dependency depJar.value
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+plugins {
+  id 'java-library' // 支持 api
+}
+
+dependencies {
+  api project(':meinian-bean')
+
+  api 'com.baomidou:mybatis-plus-boot-starter'
+  implementation 'com.alibaba:druid-spring-boot-starter'
+  implementation 'mysql:mysql-connector-java'
+
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+  //lombok
+  annotationProcessor 'org.projectlombok:lombok'
+  compileOnly 'org.projectlombok:lombok'
+  testAnnotationProcessor 'org.projectlombok:lombok'
+  testCompileOnly 'org.projectlombok:lombok'
+}
+
+test {
+  useJUnitPlatform()
+}
